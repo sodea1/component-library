@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useInterval } from "../custom_hooks";
 import "./styles/Carousel.scss";
 
 const Carousel = ({ images }) => {
@@ -12,6 +12,8 @@ const Carousel = ({ images }) => {
         });
 
     }, [currSlide])
+
+    useInterval(() => setSlide((currSlide + 3) % images.length), 2000);
 
     const handleSlide = (e) => {
         e.preventDefault();
@@ -26,7 +28,10 @@ const Carousel = ({ images }) => {
                 {images.map((img, i) => {
                     return (
                         <div className="slide" key={i}>
+                            {/* for UNSPLASH */}
                             <img src={img.urls.small} height="100px" width="100px"></img>
+                            {/* for sample JSON */}
+                            {/* <img src={img.url} ></img> */}
                         </div>
                     )})
                 }
