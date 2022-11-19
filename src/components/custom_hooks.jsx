@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react";
 
 // populates state on initial render of component
 // takes in URL to make GET request & setState function

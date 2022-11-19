@@ -18,8 +18,6 @@ const TodoIndex = ({ todos }) => {
                 <option value="Complete">Complete</option>
             </select>
             {todos.map((todo, i) => {
-                console.log("printing todos")
-                console.log(filter === "Incomplete")
                 if (filter === "Incomplete" && !todo.completed) {
                     return <Todo key={i} title={todo.title} status={todo.completed} />
                 } else if (filter === "Complete" && todo.completed) {
