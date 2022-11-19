@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import TodoForm from './components/todos/TodoForm';
+// import FlashIndex from './components/flashcards/FlashIndex';
+import TodoIndex from './components/todos/TodoIndex';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [creating, setCreating] = useState(false);
+
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res => res.json())
+      .then((data) => setTodos([...data]))
+      .catch((err) => console.log(err))
+  }, [])
+
+  const toggleCreateForm = (e) => {
+    e.preventDefault();
+    setCreating(creating ? false : true);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!creating ? <button onClick={toggleCreateForm} >Create Todo</button> : ""}
+      {creating ? <button onClick={toggleCreateForm} >Cancel</button> : ""}
+      {creating ? <TodoForm setTodos={setTodos} todos={todos} setCreating={setCreating} /> : ""}
+
+      <div className='todo-index-container'>
+        <TodoIndex todos={todos} />
+      </div>
     </div>
   );
 }
