@@ -7,6 +7,7 @@ export const useFetch = (url, setStateCallback) => {
         fetch(url)
             .then(res => res.json())
             .then(data => setStateCallback([...data]))
+            // .then(data => console.log(data))
             .catch(err => console.log(err))
     }, [])
 }
