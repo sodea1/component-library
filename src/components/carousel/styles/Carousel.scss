@@ -1,6 +1,6 @@
 .slider-container {
     display: grid;
-    height: 100vh;
+    // height: 100vh;
     place-items: center;
 }
 
@@ -53,4 +53,23 @@
 .btn-next {
     top: 45%;
     right: 2%;
+}
+
+.icon-container {
+    height: 100%;
+    width: 100%;
+
+    .icon {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        color: white;
+
+    }
+}
+
+.list-item {
+    position: relative;
+    height: 100px;
+    width: 100px;
 }
