@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useInterval } from "../custom_hooks";
 import "./styles/Carousel.scss";
 
-const Carousel = ({ images }) => {
-    const [currSlide, setSlide] = useState(0);
-
+const Carousel = ({ images, currSlide, setSlide }) => {
     useEffect(() => {
         const slides = document.querySelectorAll(".slide");
         slides.forEach((slide, i) => {
@@ -12,8 +9,6 @@ const Carousel = ({ images }) => {
         });
 
     }, [currSlide])
-
-    useInterval(() => setSlide((currSlide + 3) % images.length), 2000);
 
     const handleSlide = (e) => {
         e.preventDefault();
