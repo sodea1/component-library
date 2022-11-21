@@ -1,5 +1,6 @@
 import './App.css';
 import CarouselApp from './components/carousel/CarouselApp';
+import TimerApp from './components/timer/TimerApp';
 import TodoApp from './components/todos/TodoApp';
 
 function App() {
@@ -13,7 +14,10 @@ function App() {
       {/* <FlashIndex /> */}
 
       {/* CAROUSEL */}
-      <CarouselApp />
+      {/* <CarouselApp /> */}
+
+      {/* TIMER */}
+      <TimerApp />
     </div>
   );
 }
