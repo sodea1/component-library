@@ -6,6 +6,7 @@ const TimerIndex = ({ timers }) => {
         <div>
             {timers.map((timer, i) => <Timer 
                 key={i}
+                idx={i}
                 hours={timer.hours} 
                 minutes={timer.minutes} 
                 seconds={timer.seconds} 

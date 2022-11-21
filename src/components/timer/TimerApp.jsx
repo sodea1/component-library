@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TimerForm from "./TimerForm";
 import TimerIndex from "./TimerIndex";
 
@@ -9,8 +9,12 @@ const TimerApp = () => {
         minutes: 25,
         seconds: 10
     }
-    
+
     const [timers, setTimers] = useState([initTimer]);
+
+    useEffect(() => {   
+        // timers[timers.length - 1];
+    }, [timers])
 
     const addTimer = (newTimer) => {
         let nextTimer = [...timers, newTimer];
