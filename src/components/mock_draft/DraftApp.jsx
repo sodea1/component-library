@@ -16,9 +16,8 @@ const DraftApp = () => {
     const [rosters, setRosters] = useState([]); // [{team: { players: [ array of strings ]}, team2: { players: [array of strings]}, team3: ...}];
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
-    const [currTeamIdx, setCurrTeamIdx] = useState(0);
-    const [currTeamPicking, setCurrTeamPicking] = useState();
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
+    let currTeam = teams[0];
 
     
     useEffect(() => {
@@ -32,34 +31,29 @@ const DraftApp = () => {
                 
                 [sampleTeams[currIdx], sampleTeams[randomIdx]] = [sampleTeams[randomIdx], sampleTeams[currIdx]];
             }
-            
+
             setTeams(sampleTeams);
         };
         
         randomize(sampleTeams);
     }, []);
-    
-    
-    useEffect(() => {
-        let index = (currentPick % teams.length) - 1; //  % 10 
-        if (index === -1) {
-            index = 9;
-        };
-
-        setCurrTeamIdx(index);
-    }, [currentPick, teams])
 
     useEffect(() => {
-        setCurrTeamPicking(teams[currTeamIdx]);
-    }, [currTeamIdx])
+        // reorder teams
+        if (teams.length > 0) {
+            let updatedTeams = teams;
+            updatedTeams.push(updatedTeams.shift());
+            setTeams(updatedTeams);
+        }
+    }, [currentPick])
 
     useEffect(() => {
         // initialize rosters
         const rosterArr = [];
 
-        for (let i = 0; i < teams.length; i++) {
+        for (let i = 0; i < sampleTeams.length; i++) {
             let rosterObj = {};
-            rosterObj[teams[i]] = {
+            rosterObj[sampleTeams[i]] = {
                 players: []
             };
 
@@ -67,7 +61,7 @@ const DraftApp = () => {
         }
 
         setRosters(rosterArr);
-    }, [teams])
+    }, [])
 
     useEffect(() => {
         fetch("https://dummyjson.com/users/")
@@ -93,19 +87,26 @@ const DraftApp = () => {
         return `${num + ending}`
     }
 
-    const appendRoster = (playerName, teamName = currTeamPicking) => {
+    const appendRoster = (playerName) => {
         let updatedRoster = rosters;
-        updatedRoster[currTeamIdx][teamName]["players"].push(playerName);
+        // need to find current team
+        // updatedRoster[][teamName]["players"].push(playerName);
+        for (let i = 0; i < updatedRoster.length; i++) {
+            if (updatedRoster[i][teams[0]]) {
+                updatedRoster[i][teams[0]]["players"].push(playerName);
+            }
+        }
+
         setRosters(updatedRoster);
     }
 
     return (
         <div className="app-container">
-            <DraftQueue className="queue-container" teams={teams} currTeamIdx={currTeamIdx} />
+            <DraftQueue className="queue-container" teams={teams.slice(1)} />
             <div className="form-container">
                 <div>{stringifyNum(currentPick) + " Pick"}</div>
                 <div>{stringifyNum() + " Round"}</div>
-                <span>{`Current Team: ${currTeamPicking}`}</span>
+                <span>{`Current Team: ${(teams.length > 0) ? currTeam : ""}`}</span>    
                 <DraftForm players={players} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
             </div>
         </div>

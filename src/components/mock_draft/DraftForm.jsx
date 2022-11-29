@@ -9,7 +9,6 @@ const DraftForm = ({ players, appendRoster, setCurrentPick, currentPick }) => {
         setCurrentPick(currentPick + 1);
         appendRoster(fullName);
         // reset timer
-        // 
     }
 
     return (
