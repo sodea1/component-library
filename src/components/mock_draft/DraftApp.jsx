@@ -39,6 +39,7 @@ const DraftApp = () => {
         randomize(sampleTeams);
     }, []);
     
+    
     useEffect(() => {
         let index = (currentPick % teams.length) - 1; //  % 10 
         if (index === -1) {
@@ -100,7 +101,7 @@ const DraftApp = () => {
 
     return (
         <div className="app-container">
-            <DraftQueue className="queue-container" teams={teams} />
+            <DraftQueue className="queue-container" teams={teams} currTeamIdx={currTeamIdx} />
             <div className="form-container">
                 <div>{stringifyNum(currentPick) + " Pick"}</div>
                 <div>{stringifyNum() + " Round"}</div>
