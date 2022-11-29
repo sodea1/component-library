@@ -17,6 +17,17 @@ const DraftApp = () => {
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
+    
+    const currTeamIdx = () => {
+        let index = (currentPick % teams.length) - 1; //  % 10 
+        if (index === -1) {
+            index = 9;
+        };
+        console.log(index);
+        return index;
+    }
+    
+    let currTeamPicking = teams[currTeamIdx()];
 
     useEffect(() => {
         const randomize = (sampleTeams) => {
@@ -59,7 +70,7 @@ const DraftApp = () => {
             .catch(err => console.log(err))
 
     }, []);
-    
+
     const stringifyNum = (num = Math.floor(currentPick / teams.length) + 1) => {
         let ending = "";
         let lastDigit = num % 10;
@@ -76,9 +87,9 @@ const DraftApp = () => {
         return `${num + ending}`
     }
 
-    const appendRoster = (playerName, teamName) => {
+    const appendRoster = (playerName, teamName = currTeamPicking) => {
         let updatedRoster = rosters;
-        updatedRoster[teamName].players.push(playerName);
+        updatedRoster[currTeamIdx()][teamName]["players"].push(playerName);
         setRosters(updatedRoster);
     }
 
@@ -88,8 +99,8 @@ const DraftApp = () => {
             <div className="form-container">
                 <div>{stringifyNum(currentPick) + " Pick"}</div>
                 <div>{stringifyNum() + " Round"}</div>
-                <span>{`Current Team: ${teams[currentPick % teams.length - 1]}`}</span>
-                <DraftForm players={players} appendRoster={appendRoster} />
+                <span>{`Current Team: ${currTeamPicking}`}</span>
+                <DraftForm players={players} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
             </div>
         </div>
     )

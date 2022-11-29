@@ -1,12 +1,15 @@
 import React from "react";
 import "./DraftForm.scss";
 
-const DraftForm = ({ players, appendRoster }) => {
+const DraftForm = ({ players, appendRoster, setCurrentPick, currentPick }) => {
 
     const choosePlayer = (e) => {
         e.preventDefault();
         let fullName = e.target.innerHTML;
-        
+        appendRoster(fullName);
+        setCurrentPick(currentPick + 1);
+        // reset timer
+        // 
     }
 
     return (
