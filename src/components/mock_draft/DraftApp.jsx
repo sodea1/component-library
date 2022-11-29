@@ -16,36 +16,41 @@ const DraftApp = () => {
     const [rosters, setRosters] = useState([]); // [{team: { players: [ array of strings ]}, team2: { players: [array of strings]}, team3: ...}];
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
+    const [currTeamIdx, setCurrTeamIdx] = useState(0);
+    const [currTeamPicking, setCurrTeamPicking] = useState();
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
-    
-    const currTeamIdx = () => {
-        let index = (currentPick % teams.length) - 1; //  % 10 
-        if (index === -1) {
-            index = 9;
-        };
-        console.log(index);
-        return index;
-    }
-    
-    let currTeamPicking = teams[currTeamIdx()];
 
+    
     useEffect(() => {
         const randomize = (sampleTeams) => {
             let currIdx = sampleTeams.length;
             let randomIdx;
-
+            
             while (currIdx !== 0) {
                 randomIdx = Math.floor(Math.random() * currIdx);
                 currIdx--;
-
+                
                 [sampleTeams[currIdx], sampleTeams[randomIdx]] = [sampleTeams[randomIdx], sampleTeams[currIdx]];
             }
-
+            
             setTeams(sampleTeams);
         };
         
         randomize(sampleTeams);
     }, []);
+    
+    useEffect(() => {
+        let index = (currentPick % teams.length) - 1; //  % 10 
+        if (index === -1) {
+            index = 9;
+        };
+
+        setCurrTeamIdx(index);
+    }, [currentPick, teams])
+
+    useEffect(() => {
+        setCurrTeamPicking(teams[currTeamIdx]);
+    }, [currTeamIdx])
 
     useEffect(() => {
         // initialize rosters
@@ -89,7 +94,7 @@ const DraftApp = () => {
 
     const appendRoster = (playerName, teamName = currTeamPicking) => {
         let updatedRoster = rosters;
-        updatedRoster[currTeamIdx()][teamName]["players"].push(playerName);
+        updatedRoster[currTeamIdx][teamName]["players"].push(playerName);
         setRosters(updatedRoster);
     }
 

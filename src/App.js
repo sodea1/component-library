@@ -8,7 +8,7 @@ import DraftApp from './components/mock_draft/DraftApp';
 
 function App() {
   return (
-    <div>
+    <div className='master-wrapper'>
       {/* TODOS */}
       {/* <TodoApp /> */}
 
