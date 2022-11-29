@@ -1,10 +1,12 @@
 import React from "react";
 import "./DraftForm.scss";
 
-const DraftForm = ({ players }) => {
+const DraftForm = ({ players, appendRoster }) => {
 
-    const choosePlayer = () => {
-
+    const choosePlayer = (e) => {
+        e.preventDefault();
+        let fullName = e.target.innerHTML;
+        
     }
 
     return (

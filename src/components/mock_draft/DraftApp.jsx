@@ -3,7 +3,7 @@ import DraftQueue from "./DraftQueue";
 import DraftForm from "./DraftForm";
 import './DraftApp.scss';
 // Overview: 10 teams in a hacker league have a draft each year. The rules of the draft are as follows:
-    // 100 users to be drafted
+    // 30 users to be drafted
     // order of draft selection is randomly chosen
     // the 10th pick gets the 11th pick and so on
     // each round lasts 1 min. If a user is chosed, the timer resets and the next team picks
@@ -37,6 +37,22 @@ const DraftApp = () => {
     }, []);
 
     useEffect(() => {
+        // initialize rosters
+        const rosterArr = [];
+
+        for (let i = 0; i < teams.length; i++) {
+            let rosterObj = {};
+            rosterObj[teams[i]] = {
+                players: []
+            };
+
+            rosterArr.push(rosterObj);
+        }
+
+        setRosters(rosterArr);
+    }, [teams])
+
+    useEffect(() => {
         fetch("https://dummyjson.com/users/")
             .then(res => res.json())
             .then(data => setPlayers(data.users))
@@ -60,13 +76,19 @@ const DraftApp = () => {
         return `${num + ending}`
     }
 
+    const appendRoster = (playerName, teamName) => {
+        let updatedRoster = rosters;
+        updatedRoster[teamName].players.push(playerName);
+        setRosters(updatedRoster);
+    }
+
     return (
         <div className="app-container">
             <DraftQueue className="queue-container" teams={teams} />
             <div className="form-container">
                 <div>{stringifyPick(currentPick) + " Pick"}</div>
                 <span>Team A</span>
-                <DraftForm players={players} />
+                <DraftForm players={players} appendRoster={appendRoster} />
             </div>
         </div>
     )
