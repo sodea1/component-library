@@ -4,6 +4,7 @@ import PostApp from './components/posts/PostApp';
 import TimerApp from './components/timer/TimerApp';
 import TodoApp from './components/todos/TodoApp';
 import JournalApp from './components/journal/JournalApp';
+import DraftApp from './components/mock_draft/DraftApp';
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
       {/* <PostApp /> */}
 
       {/* JOURNAL */}
-      <JournalApp />
+      {/* <JournalApp /> */}
+
+      {/* DRAFT */}
+      <DraftApp />
     </div>
   );
 }

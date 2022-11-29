@@ -1,0 +1,19 @@
+.form-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.player-btn {
+    background: none;
+    outline: none;
+    border: 1px solid orange;
+    width: 10rem;
+    padding: 1rem;
+    margin: 2px;
+
+    &:hover {
+        background-color: rgba(246, 198, 109, 0.4);
+        cursor: pointer;
+    }
+}
