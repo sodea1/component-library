@@ -12,27 +12,28 @@ import './DraftApp.scss';
     // 
 
 const DraftApp = () => {
-    const [teams, setTeams] = useState(["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"]);
-    const [rosters, setRosters] = useState([]) // [{team: { players: [ array of strings ]}, team2: { players: [array of strings]}, team3: ...}];
+    const [teams, setTeams] = useState([]);
+    const [rosters, setRosters] = useState([]); // [{team: { players: [ array of strings ]}, team2: { players: [array of strings]}, team3: ...}];
     const [currentPick, setCurrentPick] = useState(1); 
     const [players, setPlayers] = useState([]);
+    const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
 
     useEffect(() => {
-        const randomize = (teams) => {
-            let currIdx = teams.length;
+        const randomize = (sampleTeams) => {
+            let currIdx = sampleTeams.length;
             let randomIdx;
 
             while (currIdx !== 0) {
                 randomIdx = Math.floor(Math.random() * currIdx);
                 currIdx--;
 
-                [teams[currIdx], teams[randomIdx]] = [teams[randomIdx], teams[currIdx]];
+                [sampleTeams[currIdx], sampleTeams[randomIdx]] = [sampleTeams[randomIdx], sampleTeams[currIdx]];
             }
 
-            setTeams(teams);
+            setTeams(sampleTeams);
         };
         
-        randomize(teams);
+        randomize(sampleTeams);
     }, []);
 
     useEffect(() => {
