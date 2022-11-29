@@ -11,9 +11,9 @@ const DraftForm = ({ players, appendRoster }) => {
 
     return (
         <div className="form-wrapper">
-            {players.map((player) => {
+            {players.map((player, i) => {
                 return (
-                    <div>
+                    <div key={i}>
                         <button onClick={choosePlayer} className="player-btn">{player.firstName + " " + player.lastName}</button>
                     </div>
                 )

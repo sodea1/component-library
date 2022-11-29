@@ -14,7 +14,7 @@ import './DraftApp.scss';
 const DraftApp = () => {
     const [teams, setTeams] = useState([]);
     const [rosters, setRosters] = useState([]); // [{team: { players: [ array of strings ]}, team2: { players: [array of strings]}, team3: ...}];
-    const [currentPick, setCurrentPick] = useState(1); 
+    const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
 
@@ -59,8 +59,8 @@ const DraftApp = () => {
             .catch(err => console.log(err))
 
     }, []);
-
-    const stringifyPick = (num) => {
+    
+    const stringifyNum = (num = Math.floor(currentPick / teams.length) + 1) => {
         let ending = "";
         let lastDigit = num % 10;
         if (lastDigit === 1) {
@@ -86,8 +86,9 @@ const DraftApp = () => {
         <div className="app-container">
             <DraftQueue className="queue-container" teams={teams} />
             <div className="form-container">
-                <div>{stringifyPick(currentPick) + " Pick"}</div>
-                <span>Team A</span>
+                <div>{stringifyNum(currentPick) + " Pick"}</div>
+                <div>{stringifyNum() + " Round"}</div>
+                <span>{`Current Team: ${teams[currentPick % teams.length - 1]}`}</span>
                 <DraftForm players={players} appendRoster={appendRoster} />
             </div>
         </div>
