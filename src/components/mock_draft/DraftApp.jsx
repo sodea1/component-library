@@ -5,8 +5,7 @@ import './DraftApp.scss';
 // Overview: 10 teams in a hacker league have a draft each year. The rules of the draft are as follows:
     // 30 users to be drafted
     // order of draft selection is randomly chosen
-    // the 10th pick gets the 11th pick and so on
-    // each round lasts 1 min. If a user is chosed, the timer resets and the next team picks
+    // each round lasts 1 min. If a user is chosen, the timer resets and the next team picks
 
 // Approach:
     // 
@@ -80,7 +79,6 @@ const DraftApp = () => {
 
         for (let i = 0; i < updatedRoster.length; i++) {
             if (updatedRoster[i][teams[0]]) {
-                console.log(updatedRoster[i][teams[0]])
                 updatedRoster[i][teams[0]]["players"].push(playerName);
             }
         }
@@ -90,12 +88,20 @@ const DraftApp = () => {
     return (
         <div className="app-container">
             <DraftQueue className="queue-container" teams={teams.slice(1)} />
-            <div className="form-container">
+
+        {currentPick <= 30 ? 
+            <div className="draft-details-container">
                 <div>{stringifyNum(currentPick) + " Pick"}</div>
                 <div>{stringifyNum() + " Round"}</div>
                 <div>{`Current Team: ${teams[0]}`}</div>
-                <DraftForm players={players} setTeams={setTeams} teams={teams} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
+                <DraftForm players={players} setPlayers={setPlayers} setTeams={setTeams} teams={teams} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
             </div>
+        :
+            <div className="draft-details-container">
+                <span>DRAFT IS COMPLETE!!</span>
+                
+            </div>
+        }
         </div>
     )
 }
