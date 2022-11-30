@@ -99,7 +99,7 @@ const DraftApp = () => {
             </div>
         :
             <div className="draft-details-container">
-                <span>DRAFT IS COMPLETE!!</span>
+                <h1>DRAFT IS COMPLETE!!</h1>
                 <Roster teams={teams} rosters={rosters} />
             </div>
         }

@@ -1,9 +1,10 @@
 import React from "react";
+import "./QueueItem.scss";
 
-const QueueItem = ({ team }) => {
+const QueueItem = ({ team, nextUp }) => {
     return (
         <div className="item-wrapper">
-            {team}
+            {(nextUp) ? `Next Up: ${team}` : team}
         </div>
     )
 }
