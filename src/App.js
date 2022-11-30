@@ -1,7 +1,7 @@
 import './App.css';
 import CarouselApp from './components/carousel/CarouselApp';
 import PostApp from './components/posts/PostApp';
-import TimerApp from './components/timer/TimerApp';
+import TimerApp from './class_components/timer/TimerApp';
 import TodoApp from './components/todos/TodoApp';
 import JournalApp from './components/journal/JournalApp';
 import DraftApp from './components/mock_draft/DraftApp';
@@ -20,6 +20,8 @@ function App() {
 
       {/* TIMER */}
       {/* <TimerApp /> */}
+      {/* class component */}
+      <TimerApp />
 
       {/* POSTS */}
       {/* <PostApp /> */}
@@ -28,7 +30,8 @@ function App() {
       {/* <JournalApp /> */}
 
       {/* DRAFT */}
-      <DraftApp />
+      {/* <DraftApp /> */}
+      
     </div>
   );
 }
