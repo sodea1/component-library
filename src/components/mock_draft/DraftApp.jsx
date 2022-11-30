@@ -17,7 +17,7 @@ const DraftApp = () => {
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
-    let currTeam = teams[0];
+    console.log(currentPick);
 
     
     useEffect(() => {
@@ -37,15 +37,6 @@ const DraftApp = () => {
         
         randomize(sampleTeams);
     }, []);
-
-    useEffect(() => {
-        // reorder teams
-        if (teams.length > 0) {
-            let updatedTeams = teams;
-            updatedTeams.push(updatedTeams.shift());
-            setTeams(updatedTeams);
-        }
-    }, [currentPick])
 
     useEffect(() => {
         // initialize rosters
@@ -106,8 +97,8 @@ const DraftApp = () => {
             <div className="form-container">
                 <div>{stringifyNum(currentPick) + " Pick"}</div>
                 <div>{stringifyNum() + " Round"}</div>
-                <span>{`Current Team: ${(teams.length > 0) ? currTeam : ""}`}</span>    
-                <DraftForm players={players} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
+                <div>{`Current Team: ${teams[0]}`}</div>
+                <DraftForm players={players} setTeams={setTeams} teams={teams} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
             </div>
         </div>
     )
