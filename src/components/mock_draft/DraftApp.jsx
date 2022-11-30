@@ -92,9 +92,11 @@ const DraftApp = () => {
 
         {currentPick <= 30 ? 
             <div className="draft-details-container">
-                <div>{stringifyNum(currentPick) + " Pick"}</div>
-                <div>{stringifyNum() + " Round"}</div>
-                <div>{`Current Team: ${teams[0]}`}</div>
+                <div className="pick-details">
+                    <div>{stringifyNum(currentPick) + " Pick"}</div>
+                    <div>{stringifyNum() + " Round"}</div>
+                    <div>{`Current Team: ${teams[0]}`}</div>
+                </div>
                 <DraftForm players={players} setPlayers={setPlayers} setTeams={setTeams} teams={teams} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
             </div>
         :
