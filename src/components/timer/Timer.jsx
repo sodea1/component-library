@@ -13,9 +13,6 @@ const Timer = ({ title, hours, minutes, seconds }) => {
         let hh = Number(hrs);
         let mm = Number(mins);
         let ss = Number(secs);
-        console.log(hh)
-        console.log(mm)
-        console.log(ss)
         // set Interval: callback will return new time 1 second less
         if (ss === 0 && mm === 0 && hh === 0) {
             // delete timer

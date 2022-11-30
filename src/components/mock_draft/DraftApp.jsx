@@ -17,6 +17,7 @@ const DraftApp = () => {
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
+    const [time, setTime] = useState(null);
     
     useEffect(() => {
         const randomize = (sampleTeams) => {
@@ -35,6 +36,14 @@ const DraftApp = () => {
         
         randomize(sampleTeams);
     }, []);
+
+    useEffect(() => {
+        let timerId = setInterval(() => {
+            setTime(new Date().toString());
+        }, 1000);
+
+        return () => clearInterval(timerId);
+    }, [])
 
     useEffect(() => {
         // initialize rosters
@@ -90,7 +99,7 @@ const DraftApp = () => {
         <div className="app-container">
             <DraftQueue className="queue-container" teams={teams.slice(1)} />
 
-        {currentPick <= 30 ? 
+        {players.length > 0 ? 
             <div className="draft-details-container">
                 <div className="pick-details">
                     <div>{stringifyNum(currentPick) + " Pick"}</div>
@@ -98,6 +107,10 @@ const DraftApp = () => {
                     <div>{`Current Team: ${teams[0]}`}</div>
                 </div>
                 <DraftForm players={players} setPlayers={setPlayers} setTeams={setTeams} teams={teams} appendRoster={appendRoster} setCurrentPick={setCurrentPick} currentPick={currentPick} />
+                {/* timer goes here */}
+                <div className="timer-container">
+                    {time}
+                </div>
             </div>
         :
             <div className="draft-details-container">

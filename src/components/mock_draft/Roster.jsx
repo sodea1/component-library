@@ -2,8 +2,6 @@ import React from "react";
 import './Roster.scss';
 
 const Roster = ({ teams, rosters }) => {
-    console.log(teams)
-    console.log(rosters)
     return (
         <div className="roster-grid">
             {rosters.map((roster, i) => {   
