@@ -17,8 +17,6 @@ const DraftApp = () => {
     const [currentPick, setCurrentPick] = useState(1);
     const [players, setPlayers] = useState([]);
     const sampleTeams = ["Warriors", "Grizzlies", "Knicks", "Suns", "Bulls", "Hornets", "Pelicans", "Nets", "Heat", "Lakers"];
-    console.log(currentPick);
-
     
     useEffect(() => {
         const randomize = (sampleTeams) => {
@@ -50,7 +48,6 @@ const DraftApp = () => {
 
             rosterArr.push(rosterObj);
         }
-
         setRosters(rosterArr);
     }, [])
 
@@ -80,14 +77,13 @@ const DraftApp = () => {
 
     const appendRoster = (playerName) => {
         let updatedRoster = rosters;
-        // need to find current team
-        // updatedRoster[][teamName]["players"].push(playerName);
+
         for (let i = 0; i < updatedRoster.length; i++) {
             if (updatedRoster[i][teams[0]]) {
+                console.log(updatedRoster[i][teams[0]])
                 updatedRoster[i][teams[0]]["players"].push(playerName);
             }
         }
-
         setRosters(updatedRoster);
     }
 

@@ -6,12 +6,11 @@ const DraftForm = ({ players, setTeams, teams, appendRoster, setCurrentPick, cur
     const choosePlayer = (e) => {
         e.preventDefault();
         let fullName = e.target.innerHTML;
+        appendRoster(fullName);
         let updatedTeams = teams;
         updatedTeams.push(updatedTeams.shift());
         setCurrentPick(currentPick + 1);
         setTeams(updatedTeams);
-        // appendRoster(fullName);
-        // reset timer
     }
 
     return (
