@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DraftQueue from "./DraftQueue";
 import DraftForm from "./DraftForm";
 import './DraftApp.scss';
+import Roster from "./Roster";
 // Overview: 10 teams in a hacker league have a draft each year. The rules of the draft are as follows:
     // 30 users to be drafted
     // order of draft selection is randomly chosen
@@ -99,7 +100,7 @@ const DraftApp = () => {
         :
             <div className="draft-details-container">
                 <span>DRAFT IS COMPLETE!!</span>
-                
+                <Roster teams={teams} rosters={rosters} />
             </div>
         }
         </div>
