@@ -5,6 +5,7 @@ import TimerApp from './class_components/timer/TimerApp';
 import TodoApp from './components/todos/TodoApp';
 import JournalApp from './components/journal/JournalApp';
 import DraftApp from './components/mock_draft/DraftApp';
+import CalculatorApp from './components/calculator/CalculatorApp';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       {/* TIMER */}
       {/* <TimerApp /> */}
       {/* class component */}
-      <TimerApp />
+      {/* <TimerApp /> */}
 
       {/* POSTS */}
       {/* <PostApp /> */}
@@ -31,6 +32,9 @@ function App() {
 
       {/* DRAFT */}
       {/* <DraftApp /> */}
+
+      {/* CALCULATOR */}
+      <CalculatorApp />
       
     </div>
   );
