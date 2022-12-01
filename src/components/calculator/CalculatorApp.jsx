@@ -31,9 +31,63 @@ const CalculatorApp = () => {
         res: 0
     });
 
+    const resetClickHandler = (e) => {
+        e.preventDefault();
+
+    }
+
+    const invertClickHandler = (e) => {
+        e.preventDefault();
+    }
+
+    const percentClickHandler = (e) => {
+        e.preventDefault();
+    }
+
+    const equalsClickHandler = (e) => {
+        e.preventDefault();
+
+    }
+
+    const signClickHandler = (e) => {
+        e.preventDefault();
+        const value = e.target.innerHTML;
+
+        setCalc({
+            ...calc,
+            sign: value,
+            res: !calc.res && calc.num ? calc.num : calc.res,
+            num: 0
+        });
+    }
+    
+    const commaClickHandler = (e) => {
+        e.preventDefault();
+    }
+
+    const numClickHandler = (e) => {
+        e.preventDefault();
+        const value = e.target.innerHTML;
+
+        if (calc.num < 16) {
+            setCalc({
+                ...calc,
+                num: 
+                    calc.num === 0 && value === "0"
+                    ? "0"
+                    // check if positive
+                    : calc.num % 1 === 0
+                    // string two digits together and conver to number
+                    ? Number(calc.num + value)
+                    : calc.num + value,
+                res: !calc.sign ? 0 : calc.res
+            })
+        }
+    }
+
     return (
         <div className='calc-app-wrapper'>
-            <Screen />
+            <Screen value={calc.res ? calc.res : calc.num} />
             <ButtonBox>
                 {btnVals.flat().map((val, i) => {
                     return (
@@ -41,9 +95,21 @@ const CalculatorApp = () => {
                             key={i}
                             value={val}
                             className={val === 0 ? "zero" : ""}
-                            onClick={() => {
-                                // event handlers go here
-                            }}>
+                            onClick={
+                                btn === "C"
+                                ? resetClickHandler
+                                : btn === "+/-"
+                                ? invertClickHandler
+                                : btn === "%"
+                                ? percentClickHandler
+                                : btn === "="
+                                ? equalsClickHandler
+                                : btn === "/" || btn === "x" || btn === "+" || btn === "-"
+                                ? signClickHandler
+                                : btn === "."
+                                ? commaClickHandler
+                                : numClickHandler 
+                            }>
                             {val}
                         </Button>
                     )
