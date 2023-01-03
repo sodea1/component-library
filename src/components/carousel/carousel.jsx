@@ -20,7 +20,6 @@ const Carousel = ({ images, currSlide, setSlide, addFavorite }) => {
 
     const handleFav = (url, e) => {
         e.preventDefault();
-        console.log("add fav")
         addFavorite(url);
     }
 

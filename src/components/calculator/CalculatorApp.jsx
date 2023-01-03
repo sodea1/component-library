@@ -96,17 +96,17 @@ const CalculatorApp = () => {
                             value={val}
                             className={val === 0 ? "zero" : ""}
                             onClick={
-                                btn === "C"
+                                val === "C"
                                 ? resetClickHandler
-                                : btn === "+/-"
+                                : val === "+/-"
                                 ? invertClickHandler
-                                : btn === "%"
+                                : val === "%"
                                 ? percentClickHandler
-                                : btn === "="
+                                : val === "="
                                 ? equalsClickHandler
-                                : btn === "/" || btn === "x" || btn === "+" || btn === "-"
+                                : val === "/" || val === "x" || val === "+" || val === "-"
                                 ? signClickHandler
-                                : btn === "."
+                                : val === "."
                                 ? commaClickHandler
                                 : numClickHandler 
                             }>

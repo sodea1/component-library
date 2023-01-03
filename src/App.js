@@ -31,10 +31,10 @@ function App() {
       {/* <JournalApp /> */}
 
       {/* DRAFT */}
-      {/* <DraftApp /> */}
+      <DraftApp />
 
       {/* CALCULATOR */}
-      <CalculatorApp />
+      {/* <CalculatorApp /> */}
       
     </div>
   );
